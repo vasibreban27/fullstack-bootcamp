@@ -24,18 +24,32 @@ html,body{
     height: 100vh;
 }
 body{
-    display: flex;
-    flex-direction: column ;
+    display: grid;
     margin: 0;
 }
 
-/*rata de crestere flex grow, shrink, basis*/
-body > * {
-    flex: 1 1 auto;
-}
-
-
 /*stil pt tablete*/
 @media screen and (min-width: 768px){
+    body{
+        grid-template-areas: "header header"
+        "main main"
+        "left right"
+        "footer footer";
+    }
+    .header{
+        grid-area: header;
+    }
 
+    .main{
+        grid-area: main;
+    }
+    .left{
+        grid-area: left;
+    }
+    .right{
+        grid-area: right;
+    }
+    .footer{
+        grid-area: footer;
+    }
 }
