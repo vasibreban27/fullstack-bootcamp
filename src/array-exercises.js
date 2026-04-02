@@ -1,3 +1,5 @@
+'use strict'
+
 // Mock user data as from a JSON API
 const users = [
   {
@@ -211,5 +213,14 @@ const users = [
     }
   }
 ];
+console.clear();
+// return an array of users's first names
+function getUsersFirstNames(users) {
+    let output = [];
+    for(let i=0; i<users.length; i++){ //for(const user of users) output.push(user.firstName);
+        output.push(users[i].firstName.toUpperCase());
+    }
+    return output;
+}
 
-export default users;
+console.log(getUsersFirstNames(users))
