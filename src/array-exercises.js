@@ -1,5 +1,5 @@
 'use strict'
-
+console.clear();
 // Mock user data as from a JSON API
 const users = [
   {
@@ -213,7 +213,7 @@ const users = [
     }
   }
 ];
-console.clear();
+
 // return an array of users's first names
 function getUsersFirstNames(users) {
     let output = [];
@@ -223,4 +223,39 @@ function getUsersFirstNames(users) {
     return output;
 }
 
+function getUsersFirstNames2(users) {
+    return users.map(user => user.firstName.toUpperCase());
+}
+
 console.log(getUsersFirstNames(users))
+//
+//
+// function myMap( transformerFunction){ //not the best practice
+//     const output = [];
+//     for(let i=0; i<this.length; i++){
+//         output.push(transformerFunction(this[i],i,this));
+//     }
+//     return output;
+// }
+// Array.prototype.myMap = myMap;
+//
+// console.log(users.myMap(user => user.lastName));
+
+
+//create a func that takes an array of users and returns all the users which are older than 50
+function getAllUsersBy30(users){
+    let output = [];
+    for(const user of users) {
+        if (user.age > 30)
+            output.push(user);
+    }
+    return output;
+}
+
+console.log(getAllUsersBy30(users));
+
+function getAllUsersByAge(users,ageNumber){
+    return users.filter(user => user.age > ageNumber);
+}
+
+console.log(getAllUsersByAge(users,30));
