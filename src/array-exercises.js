@@ -255,7 +255,26 @@ function getAllUsersBy30(users){
 console.log(getAllUsersBy30(users));
 
 function getAllUsersByAge(users,ageNumber){
-    return users.filter(user => user.age > ageNumber);
+    return users.filter(user => user.age >= ageNumber).map(user => user.firstName);
 }
 
 console.log(getAllUsersByAge(users,30));
+
+// a function that return the first user who has an age greater than
+
+function getFirstUserOverAge(users,ageNumber){
+    for(const user of users) {
+        if (user.age >= ageNumber)
+            return user;
+    }
+}
+console.log(getFirstUserOverAge(users,40));
+
+
+function getFirstUserOverAgeV2(users,ageNumber){
+    return users.find((user) => user.age >= ageNumber)
+}
+console.log(getFirstUserOverAgeV2(users,40));
+
+
+
