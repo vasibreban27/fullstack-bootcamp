@@ -277,4 +277,46 @@ function getFirstUserOverAgeV2(users,ageNumber){
 console.log(getFirstUserOverAgeV2(users,40));
 
 
+//a function that returns true if all of the users are higher than 150 cm
 
+function isAllHeightsGreaterThan(users,heightLimit = 150){
+    //return users.filter((user) => user.heightCm >= heightLimit).length === users.length;
+
+    // for(const user of users){
+    //     if(user.heightCm < heightLimit)
+    //         return false;
+    // }
+    // return true;
+
+    return users.every((user) => user.heightCm > heightLimit);
+}
+console.log(isAllHeightsGreaterThan(users,150));
+
+/**
+ * 5. Create a function that takes an array of users and returns true if at least one of the users has a weight greater than a parameter that the function receives.
+ */
+
+function isAnyWeightGreater(users,weightLimit){
+    return users.some((user) => user.weightKg > weightLimit);
+}
+
+console.log(isAnyWeightGreater(users,70));
+
+/**
+ * 6. Create a function that takes an array of users and returns the sum of all their ages.
+ */
+
+function getSumOfAges(users){
+    let sum = 0;
+    for(const user of users){
+        sum += user.age;
+    }
+    return sum;
+}
+
+function getSumOfAgesV2(users){
+    return users.reduce((sum,user) => sum + user.age,0);
+
+}
+
+console.log(getSumOfAgesV2(users));
