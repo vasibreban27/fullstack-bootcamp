@@ -5,38 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fullstack Bootcamp</title>
 
-<!--    <link rel="stylesheet" href="styles/style.css">-->
-<!--      <link rel="stylesheet" href="src/counter.module.css">-->
+    <!-- <link rel="stylesheet" href="styles/style.css"> -->
 
-<!--    <script src="src/main.js" defer></script>-->
-<!--    <script src="src/complex-data-types.js" defer></script>-->
-<!--      <script src="src/array-exercises.js" defer></script>-->
-      <script src="src/dom.js" type="module" defer></script>
-      <script src="src/dom2.js" type="module" defer></script>
+    <!-- <script src="src/main.js" defer></script>
+    <script src="src/complex-data-types.js" defer></script>
+    <script src="src/array-exercises.js" defer></script> -->
+    <script src="src/dom.js" type="module"></script>
+    <script src="src/dom2.js" type="module"></script>
   </head>
   <body>
-  <output data-counter-display class="display">0</output>
-  <div>
-    <button data-counter-button="decrement">-</button>
+    <output data-counter-display>0</output>
+    <div>
+      <button data-counter-button="decrement">-</button>
       <button data-counter-button="reset">Reset</button>
-    <button data-counter-button="increment">+</button>
-  </div>
+      <button data-counter-button="increment"><span>+</span></button>
+    </div>
 
-  <hr>
-  <form data-todo-form>
+    <hr />
+
+    <form data-todo-form>
       <label for="title">What do you want to do?</label>
-      <input type="text" id="title" name="title"/>
-      <button type="submit">Add Todo</button>
-  </form>
+      <input type="text" id="title" name="title" />
+      <button type="submit">
+        Add Todo
+      </button>
+    </form>
     <ul data-todo-output>
-<!--        <li>-->
-<!--            <label><input type="checkbox" name="completed">Titlu todoo</label>-->
-<!--        </li>-->
+      
     </ul>
     <template data-todo-template>
-    <li>
-      <label><input type="checkbox" name="completed">Titlu todoo</label>
-    </li>
+      <li>
+        <label><input type="checkbox" name="completed"></label>
+      </li>
     </template>
   </body>
 </html>
