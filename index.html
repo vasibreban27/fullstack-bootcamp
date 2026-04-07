@@ -6,12 +6,13 @@
     <title>Fullstack Bootcamp</title>
 
 <!--    <link rel="stylesheet" href="styles/style.css">-->
-      <link rel="stylesheet" href="src/counter.css">
+<!--      <link rel="stylesheet" href="src/counter.module.css">-->
 
 <!--    <script src="src/main.js" defer></script>-->
 <!--    <script src="src/complex-data-types.js" defer></script>-->
 <!--      <script src="src/array-exercises.js" defer></script>-->
       <script src="src/dom.js" type="module" defer></script>
+      <script src="src/dom2.js" type="module" defer></script>
   </head>
   <body>
   <output data-counter-display class="display">0</output>
@@ -20,5 +21,22 @@
       <button data-counter-button="reset">Reset</button>
     <button data-counter-button="increment">+</button>
   </div>
+
+  <hr>
+  <form data-todo-form>
+      <label for="title">What do you want to do?</label>
+      <input type="text" id="title" name="title"/>
+      <button type="submit">Add Todo</button>
+  </form>
+    <ul data-todo-output>
+<!--        <li>-->
+<!--            <label><input type="checkbox" name="completed">Titlu todoo</label>-->
+<!--        </li>-->
+    </ul>
+    <template data-todo-template>
+    <li>
+      <label><input type="checkbox" name="completed">Titlu todoo</label>
+    </li>
+    </template>
   </body>
 </html>
