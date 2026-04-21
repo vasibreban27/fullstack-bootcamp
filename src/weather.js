@@ -7,7 +7,7 @@
 //   .then(console.log);
 
 const apiKey = import.meta.env.VITE_OWM_API_KEY;
-const location = 'Brasov,RO';
+const location = 'Cluj-Napoca,RO';
 
 await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${apiKey}`)
   .then((res) => res.json())
