@@ -82,3 +82,20 @@ console.log(user3.myPrivateProperty);
 User.staticProp = 'this is a static property';
 console.log(User.staticProp);//nu merge apelat pe user3 sau asa
 console.log(Admin.staticProp);
+
+//never use this!!
+const newFunc = new Function('console.log("this is quite insecure");'); //do not use this
+newFunc();
+
+for(const key in user2){
+    console.log(user2[key]);
+}
+
+console.log(user2 instanceof User);
+console.log(user2 instanceof Admin);
+console.log(user2 instanceof Object);
+console.log(user3 instanceof User);
+console.log(user3 instanceof Admin);
+console.log(user3 instanceof Object);
+
+console.log(Object.entries(user3)); //proprietate + valoare
