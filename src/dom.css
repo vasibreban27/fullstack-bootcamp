@@ -1,8 +1,0 @@
-.positive {
-  color: red;
-}
-
-
-.todoList label:has(> :checked) {
-  text-decoration: line-through;
-}
