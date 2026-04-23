@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# Fullstack Bootcamp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beginner-friendly repository for learning and experimenting with HTML, CSS, and JavaScript. This project provides a simple setup to get started with web development fundamentals. It was set up using vite and its built in Vanilla Typescript template.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/fullstack-bootcamp.git
+   cd fullstack-bootcamp
+   ```
 
-## React Compiler
+2. **Set up pnpm (optional, but recommended):**
+   ```bash
+   # Install pnpm globally
+   npm install -g pnpm
+   # or using other package managers
+   # macOS/Linux: curl -fsSL https://get.pnpm.io/install.sh | sh -
+   # Windows Powershell: iwr https://get.pnpm.io/install.ps1 -useb | iex
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3. **Install dependencies:**
+   ```bash
+   pnpm install
+   # or if you prefer npm: npm install
+   ```
 
-## Expanding the ESLint configuration
+4. **Start the development server:**
+   ```bash
+   pnpm run dev
+   # or if you prefer npm: npm run dev
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+5. **Open your browser** and navigate to `http://localhost:5173` (or the URL shown in your terminal).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Project Structure
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+fullstack-bootcamp/
+├── .git/                   # Git repository data
+├── .gitignore              # Files and folders to ignore in Git
+├── .vscode/                # VS Code configuration files
+│   ├── extensions.json     # Recommended VS Code extensions
+│   └── settings.json       # Workspace-specific VS Code settings
+├── index.html              # Main HTML file (entry point)
+├── package.json            # Node.js project configuration and dependencies
+├── public/                 # Static assets served directly
+│   └── vite.svg            # Vite logo (example static asset)
+├── src/                    # Source code directory
+└── tsconfig.json           # TypeScript configuration (if using TypeScript)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## File and Folder Descriptions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **`.git/`**: Contains Git version control data. This folder is automatically created when you initialize a Git repository.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **`.gitignore`**: Specifies files and folders that Git should ignore (not track). Common entries include `node_modules/`, build outputs, and temporary files.
+
+- **`.vscode/`**: Contains Visual Studio Code configuration files:
+  - `extensions.json`: Lists recommended extensions for this project (e.g., HTML, CSS, JavaScript support)
+  - `settings.json`: Defines workspace-specific settings like formatting preferences, linting rules, and editor behavior
+
+- **`index.html`**: The main HTML file that serves as the entry point for your web application. This is where your web page structure begins.
+
+- **`package.json`**: Defines your Node.js project, including dependencies, scripts, and metadata. It specifies what packages are needed and how to run the project.
+
+- **`public/`**: Directory for static assets that are served directly by the web server. Files here are accessible at the root URL of your application.
+
+- **`src/`**: Contains your source code files (HTML, CSS, JavaScript, TypeScript, etc.). This is where you'll write your application logic.
+
+- **`tsconfig.json`**: Configuration file for TypeScript compilation settings, including compiler options and file inclusions.
+
+## Getting Started
+
+This repository is designed for beginners to practice HTML, CSS, and JavaScript. Start by:
+
+1. Opening `index.html` in your browser or editor
+2. Modifying the HTML structure in `index.html`
+3. Adding styles in CSS files within the `src/` directory
+4. Writing JavaScript logic in JS files within the `src/` directory
+
+Experiment freely and use this as a sandbox for learning web development fundamentals!
+
+## Technologies Used
+
+- **HTML5**: For structuring web content
+- **CSS3**: For styling and layout
+- **JavaScript**: For interactivity and dynamic behavior
+- **Vite**: For fast development and building
+- **TypeScript** (optional): For type-safe JavaScript development
