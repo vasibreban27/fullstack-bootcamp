@@ -116,7 +116,7 @@ const name:SpecificTypes = 'Paul';
 console.log(name);
 
 const something: any = 'something'; //typescript is not going to type check this variable
-console.log(something);
+console.log(something); //any dezactiveaza type checking
 
 function prod(n1:number,n2:number) {
     return n1*n2;
@@ -129,14 +129,16 @@ errorCodes[code as AnotherType2] //destul de nasol si as, ca si any
 const body = document.querySelector('body')!;
 if(body === null){}
 
-function myFunc2(param: unknown):void {
-    if(typeof param === 'number')
-        param.toFixed(2);
-    if(typeof param === 'string')
-        param.charAt(3);
 
-}
- type ExcludedType<T> = T extends number ? never : T; //orice tip inafara de number
+//
+// function myFunc2(param: unknown):void {
+//     if(typeof param === 'number')
+//         param.toFixed(2);
+//     if(typeof param === 'string')
+//         param.charAt(3);
+//
+// }
+//  type ExcludedType<T> = T extends number ? never : T; //orice tip inafara de number
 
 
 
