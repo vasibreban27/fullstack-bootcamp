@@ -1,3 +1,5 @@
+import React from "react";
+
 export function Counter(){
 
     let cnt = 0;
@@ -5,9 +7,6 @@ export function Counter(){
     function handleClick(){
         cnt--;
     }
-
-
-
     return (
         <>
             <h1>Counter</h1>
