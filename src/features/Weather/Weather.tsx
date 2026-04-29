@@ -3,47 +3,63 @@ import type { WeatherData } from "./types";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
-const apiUrl = `${baseUrl}?q=Cluj-Napoca,RO&units=metric&appid=${apiKey}`;
 
 export function Weather() {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        fetch(apiUrl)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error("Failed to fetch weather data");
-                }
+    async function fetchWeather(city: string, country: string) {
+        try {
+            setError(null);
 
-                return res.json();
-            })
-            .then((data: WeatherData) => {
-                setWeatherData(data);
-            })
-            .catch((err) => {
+            const response = await fetch(
+                `${baseUrl}?q=${city},${country}&units=metric&appid=${apiKey}`
+            );
+
+            if (!response.ok) {
+                throw new Error("Could not fetch weather data");
+            }
+
+            const data: WeatherData = await response.json();
+            setWeatherData(data);
+        } catch (err) {
+            if (err instanceof Error) {
                 setError(err.message);
-            });
+            } else {
+                setError("Something went wrong");
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchWeather("Cluj-Napoca", "RO");
     }, []);
+
+    async function handleSearch(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        const city = formData.get("city");
+        const country = formData.get("country");
+
+        if (typeof city !== "string" || city.trim() === "") {
+            setError("Please enter a city");
+            return;
+        }
+
+        if (typeof country !== "string") {
+            setError("Please select a country");
+            return;
+        }
+
+        await fetchWeather(city.trim(), country);
+        form.reset();
+    }
 
     if (error) {
         return <strong>Error: {error}</strong>;
-    }
-
-    async function handleSearch(e:React.SubmitEvent<HTMLFormElement>){
-        e.preventDefault();
-        const form = e.target;
-
-        const data = new FormData(form);
-
-        fetch(`${baseUrl}?q=${data.get('city')},${data.get('country')}&units=metric&appid=${apiKey}`)
-        .then((res) => res.json())
-        .then((data: WeatherData) => {
-            setWeatherData(data);
-        })
-        .catch((err) => {
-            setError(err.message);
-        });
     }
 
     if (!weatherData) {
@@ -53,15 +69,18 @@ export function Weather() {
     return (
         <>
             <div>Weather in {weatherData.name}</div>
-            <form>
+
+            <form onSubmit={handleSearch}>
                 <label htmlFor="city">City</label>
-                <input type="text" id="city"/>
+                <input type="text" id="city" name="city" />
+
                 <label htmlFor="country">Country</label>
                 <select name="country" id="country">
                     <option value="RO">Romania</option>
                     <option value="US">USA</option>
                     <option value="GB">UK</option>
                 </select>
+
                 <button type="submit">Search</button>
             </form>
 
