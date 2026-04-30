@@ -1,12 +1,12 @@
 import { Counter } from "./features/Counter/Counter";
-import {Weather} from "./features/Weather/Weather.tsx";
+import { Weather } from "./features/Weather/Weather";
 
 export function App() {
   return (
-      <>
-          <Weather/>
-          <Counter/>
-          <Counter initialCount={3} diff={5}/>
-      </>
-  )
+  <>
+    <Weather />
+    <Counter />
+    <Counter initialCount={3} diff={5} />
+  </>
+  );
 }
