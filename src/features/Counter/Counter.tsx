@@ -36,18 +36,20 @@ export function Counter({initialCount = 0, diff = 1}) {
 
 // return createElement(React.Fragment, null, createElement('h1'), createElement('output'));
 
-// let state;
-// function dummyUseState(initialState) {
+// let state: unknown;
+// function dummyUseState<T>(initialState: T) {
 //   if(state === undefined) {
 //     state = initialState;
 //   }
 
-//   function updateState(newState) {
+//   function updateState(newState: T) {
 //     if(state !== newState) {
 //       state = newState;
 //       Counter();
 //     }
 //   }
 
-//   return [state, updateState];
+//   return [state as T, updateState] as const;
 // }
+
+// dummyUseState<null | number>(0);
