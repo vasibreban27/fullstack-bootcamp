@@ -1,10 +1,11 @@
 import { Counter } from "./features/Counter/Counter";
-import { Weather } from "./features/Weather/Weather";
+import {Todos} from "./features/Todos/Todos";
+
 
 export function App() {
   return (
   <>
-    <Weather />
+      <Todos/>
     <Counter />
     <Counter initialCount={3} diff={5} />
   </>

@@ -1,0 +1,28 @@
+{
+  "todos": [
+    {
+      "title": "go gym",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "title": "do homework",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "title": "do laundry",
+      "completed": false,
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Vasi",
+      "lastName": "Breban",
+      "email": "vbreban09@gmail.com",
+      "password": "hashed password"
+    }
+  ]
+}
