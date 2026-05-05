@@ -1,0 +1,58 @@
+.brandForm {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    width: min(90%, 420px);
+    margin: 2rem auto;
+}
+
+.brandForm h1 {
+    margin: 0 0 1rem;
+}
+
+.brandForm label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    color: var(--color-text-light-on-dark);
+    font-weight: 500;
+}
+
+.brandForm input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 0.55rem 0.75rem;
+
+    border: 1px solid #444;
+    border-radius: 4px;
+
+    background: white;
+    color: var(--color-text-dark-on-light);
+    font: inherit;
+}
+
+.brandForm button {
+    justify-self: start;
+
+    padding: 0.55rem 1rem;
+
+    border: 1px solid #444;
+    border-radius: 4px;
+
+    background: white;
+    color: var(--color-text-dark-on-light);
+    font: inherit;
+
+    cursor: pointer;
+}
+
+.brandForm button:hover {
+    background: #f1f1f1;
+}
+
+.spanFullGrid {
+    grid-column: 1 / -1;
+}
