@@ -1,31 +1,38 @@
-import type { Todo } from "./types";
+import { FaTrashAlt } from "react-icons/fa";
+import type { Todo } from './types';
 
 type Props = {
-    todo: Todo;
-    onToggle: (todo: Todo) => void;
-    onDelete: (id: number) => void;
+  todo: Todo;
 };
 
-export function TodoItem({ todo, onToggle, onDelete }: Props) {
-    return (
-        <li>
-            <label>
-                <input
-                    type="checkbox"
-                    checked={todo.completed}
-                    onChange={() => onToggle(todo)}
-                />
+export function TodoItem({ todo }: Props) {
+  function handleCompleteTodo(todo: Todo) {
+    fetch(`/api/todos/${todo.id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ completed: !todo.completed }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });    
+  }
 
-                <span
-                    style={{
-                        textDecoration: todo.completed ? "line-through" : "none",
-                    }}
-                >
-                    {todo.title}
-                </span>
-            </label>
+  function handleDeleteTodo(todo: Todo) {
+    fetch(`/api/todos/${todo.id}`, {
+      method: 'DELETE',
+    });  
+  }
 
-            <button onClick={() => onDelete(todo.id)}>Delete</button>
-        </li>
-    );
+  return (
+    <li>
+      <label>
+        <input
+          type="checkbox"
+          defaultChecked={todo.completed}
+          onChange={() => handleCompleteTodo(todo)}
+        />{' '}
+        {todo.title}
+      </label>{' '}
+      <button type="button" onClick={() => handleDeleteTodo(todo)}><FaTrashAlt /></button>
+    </li>
+  );
 }

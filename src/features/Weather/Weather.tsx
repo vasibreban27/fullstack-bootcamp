@@ -15,9 +15,7 @@ export function Weather() {
         `${baseUrl}&lat=${data.coords.latitude}&lon=${data.coords.longitude}`,
       )
         .then((res) => res.json())
-        .then((data) => {
-          setWeatherData(data);
-        });
+        .then(setWeatherData);
     }
   }, []);
 

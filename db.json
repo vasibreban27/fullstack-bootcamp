@@ -1,27 +1,42 @@
 {
   "todos": [
     {
-      "title": "go gym",
+      "id": 1,
+      "title": "Buy Milk",
       "completed": false,
+      "userId": 1
+    },
+    {
+      "id": 2,
+      "title": "Learn React",
+      "completed": true,
+      "userId": 1
+    },
+    {
+      "title": "Learn Next",
+      "completed": false,
+      "userId": 1,
       "id": 3
     },
     {
-      "title": "do homework",
-      "completed": false,
-      "id": 5
+      "title": "Test",
+      "completed": true,
+      "userId": 1,
+      "id": 4
     },
     {
-      "title": "do laundry",
+      "title": "This works",
       "completed": false,
+      "userId": 1,
       "id": 6
     }
   ],
   "users": [
     {
       "id": 1,
-      "firstName": "Vasi",
-      "lastName": "Breban",
-      "email": "vbreban09@gmail.com",
+      "firstName": "Paul",
+      "lastName": "Negoescu",
+      "email": "paul.negoescu@digitalstack.ro",
       "password": "hashed password"
     }
   ]

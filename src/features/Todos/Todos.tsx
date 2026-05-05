@@ -2,167 +2,101 @@ import { useEffect, useState } from "react";
 import type { Todo } from "./types";
 import { TodoItem } from "./TodoItem";
 
-const apiUrl = "http://localhost:3000/";
-
 export function Todos() {
-    const [todos, setTodos] = useState<Todo[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+  const [todos, setTodos] = useState<Todo[] | null>(null);
 
-    useEffect(() => {
-        fetchTodos();
-    }, []);
+  useEffect(() => {
+    fetch(`/api/todos`).then((res) => res.json()).then(setTodos);
+  }, []);
 
-    async function fetchTodos() {
-        try {
-            setLoading(true);
+  async function handleAddTodo(formData: FormData) { 
+    const title = formData.get('title');
 
-            const res = await fetch(`${apiUrl}todos`);
+    if(!title) return;
 
-            if (!res.ok) {
-                throw new Error("Failed to fetch todos");
-            }
+    const newTodo = await fetch('/api/todos', {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        completed: false,
+        userId: 1
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(res=> res.json());
 
-            const data: Todo[] = await res.json();
-            setTodos(data);
-        } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            } else {
-                setError("Something went wrong");
-            }
-        } finally {
-            setLoading(false);
-        }
-    }
+    const newTodos = todos ? [...todos, newTodo] : [newTodo];
 
-    async function handleAddTodo(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
+    setTodos(newTodos);
+  }
 
-        const formData = new FormData(e.currentTarget);
-        const title = formData.get("title");
+  // if(!todos) {
+  //   return <strong>Loading ...</strong>;
+  // }
 
-        if (!title || typeof title !== "string") {
-            return;
-        }
+  
+  // const list = [];
+  // if(todos) {
+  //   for(const todo of todos) {
+  //     list.push(<li key={todo.id}>{todo.title}</li>);
+  //   }
+  // }
+  return (
+    <>
+      <h1>Todos</h1>
 
-        const trimmedTitle = title.trim();
+      <form action={handleAddTodo}>
+        <label htmlFor="title">What do you want to do?</label>
+        <input type="text" name="title" id="title" placeholder="What do you want to do?" />
+        <button type="submit">Add Todo Item</button>
+      </form>
 
-        if (!trimmedTitle) {
-            return;
-        }
-
-        try {
-            const res = await fetch(`${apiUrl}todos`, {
-                method: "POST",
-                body: JSON.stringify({
-                    title: trimmedTitle,
-                    completed: false,
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-
-            if (!res.ok) {
-                throw new Error("Failed to add todo");
-            }
-
-            const newTodo: Todo = await res.json();
-
-            setTodos((currentTodos) => [...currentTodos, newTodo]);
-
-            e.currentTarget.reset();
-        } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            }
-        }
-    }
-
-    async function handleToggleTodo(todo: Todo) {
-        try {
-            const res = await fetch(`${apiUrl}todos/${todo.id}`, {
-                method: "PATCH",
-                body: JSON.stringify({
-                    completed: !todo.completed,
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-
-            if (!res.ok) {
-                throw new Error("Failed to update todo");
-            }
-
-            const updatedTodo: Todo = await res.json();
-
-            setTodos((currentTodos) =>
-                currentTodos.map((t) =>
-                    t.id === updatedTodo.id ? updatedTodo : t
-                )
-            );
-        } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            }
-        }
-    }
-
-    async function handleDeleteTodo(id: number) {
-        try {
-            const res = await fetch(`${apiUrl}todos/${id}`, {
-                method: "DELETE",
-            });
-
-            if (!res.ok) {
-                throw new Error("Failed to delete todo");
-            }
-
-            setTodos((currentTodos) =>
-                currentTodos.filter((todo) => todo.id !== id)
-            );
-        } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            }
-        }
-    }
-
-    if (loading) {
-        return <strong>Loading...</strong>;
-    }
-
-    return (
-        <>
-            <h1>Todos</h1>
-
-            <form onSubmit={handleAddTodo}>
-                <label htmlFor="title">What do you want to do?</label>
-
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    placeholder="What do you want to do?"
-                />
-
-                <button type="submit">Add</button>
-            </form>
-
-            {error && <p style={{ color: "red" }}>{error}</p>}
-
-            <ul>
-                {todos.map((todo) => (
-                    <TodoItem
-                        key={todo.id}
-                        todo={todo}
-                        onToggle={handleToggleTodo}
-                        onDelete={handleDeleteTodo}
-                    />
-                ))}
-            </ul>
-        </>
-    );
+      {!todos && <strong>Loading ...</strong>}
+      {todos && (
+        <ul>
+          {todos.map((t) => <TodoItem todo={t} key={t.id} />)}
+        </ul>
+      )}
+    </>
+  )
 }
+
+
+/**
+ * RESTful web services/APIs
+ * 
+ * REpresentational State Transfer
+ * 
+ * Resources: /users, /todos, /products, /comments, /weather
+ * GET    /users     -> list of all users
+ * GET    /users/:id -> one specific user
+ * POST   /users     -> will create a user from the body of the request
+ * PUT    /users/:id -> update a user by replacing it with the one in the body (except for the id)
+ * PATCH  /users/:id -> partial update of the properties specified in the body of the request
+ * DELETE /users/:id -> deletes a user
+ * 
+ * CRUD: Create / Read (Retrieve) / Update / Delete
+ * Create -> POST
+ * Read   -> GET
+ * Update -> PUT/PATCH
+ * Delete -> DELETE
+ * 
+ * Responses:
+ * 1xx -> Informational
+ * 2xx -> Success   -> 200 - OK, 201 - Created
+ * 3xx -> Redirects -> 304, 309
+ * 4xx -> Client Error -> 404 - Not Found, 401 - Unauthorized, 403 - Not Allowed, 405 - Method Not Allowed, 400 - Bad Request, 418 - I'm a teapot
+ * 5xx -> Server Error -> 500 - Internal Server Error, 502 - Bad Gateway
+ * 
+ * GraphQL
+ * {
+ *  todos: {
+ *    "title",
+ *    "completed",
+ *    "users": {
+ *        "fistName"
+ *     }
+ *  }
+ * }
+ */
