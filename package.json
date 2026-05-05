@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "server": "json-server-auth --watch db.json -r routes.json",
-    "start": "concurrently 'pnpm dev' 'pnpm run server' --prefixColors green,magenta",
+    "start": "concurrently \"pnpm dev\" \"pnpm run server\" --prefix-colors green,magenta",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
