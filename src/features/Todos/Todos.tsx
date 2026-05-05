@@ -31,6 +31,12 @@ export function Todos() {
     setTodos(newTodos);
   }
 
+  function handleAfterDeleteTodo(todo: Todo){
+      //if(!todos) return;
+      const newTodos = todos!.filter((t)=> t !== todo);
+      setTodos(newTodos);
+  }
+
   // if(!todos) {
   //   return <strong>Loading ...</strong>;
   // }
@@ -55,7 +61,7 @@ export function Todos() {
       {!todos && <strong>Loading ...</strong>}
       {todos && (
         <ul>
-          {todos.map((t) => <TodoItem todo={t} key={t.id} />)}
+          {todos.map((t) => <TodoItem todo={t} key={t.id} onDeleteTodo={handleAfterDeleteTodo}/>)}
         </ul>
       )}
     </>
