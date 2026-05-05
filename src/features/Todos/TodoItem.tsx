@@ -3,7 +3,7 @@ import type { Todo } from './types';
 
 type Props = {
   todo: Todo;
-  onDeleteTodo:(todo:Todo)=>void;
+  onDeleteTodo: (todo: Todo) => void;
 };
 
 export function TodoItem({ todo, onDeleteTodo }: Props) {
@@ -17,12 +17,12 @@ export function TodoItem({ todo, onDeleteTodo }: Props) {
     });    
   }
 
- async function handleDeleteTodo(todo: Todo) {
+  async function handleDeleteTodo(todo: Todo) {
     await fetch(`/api/todos/${todo.id}`, {
       method: 'DELETE',
     });
-      onDeleteTodo(todo);
 
+    onDeleteTodo(todo);
   }
 
   return (

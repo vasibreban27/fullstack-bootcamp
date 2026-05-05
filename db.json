@@ -1,8 +1,8 @@
 {
   "todos": [
     {
-      "id": 2,
-      "title": "Learn React",
+      "id": 1,
+      "title": "Buy Milk",
       "completed": true,
       "userId": 1
     },
@@ -11,18 +11,6 @@
       "completed": false,
       "userId": 1,
       "id": 3
-    },
-    {
-      "title": "Test",
-      "completed": true,
-      "userId": 1,
-      "id": 4
-    },
-    {
-      "title": "cf",
-      "completed": false,
-      "userId": 1,
-      "id": 5
     }
   ],
   "users": [

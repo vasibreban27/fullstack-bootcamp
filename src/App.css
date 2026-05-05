@@ -1,16 +1,27 @@
-html{
-    font-size: 62.5%;
-    font-family: 'Roboto', sans-serif;
-    color:#333;
-    background-color: #efefef;
+:root {
+  --color-primary: #bada55;
+  --color-text-light-on-dark: #efefef;
+  --color-text-dark-on-light: #333;
+  --color-bg-dark: #333;
+  --color-bg-light: #fff;
 
-    @media screen and(prefers-color-scheme: dark){
-        color:#efefef;
-        background-color: #333;
-    }
+  --color-bg: var(--color-bg-light);
+  --color-text: var(--color-text-dark-on-light);
+
+  @media screen and (prefers-color-scheme: dark) {
+    --color-bg: var(--color-bg-dark);
+    --color-text: var(--color-text-light-on-dark);
+  }
 }
 
-body{
-    margin:0;
-    font-size: 1.6rem;
+html {
+  font-size: 62.5%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  font-size: 1.6rem;
 }
