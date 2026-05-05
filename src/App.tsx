@@ -1,14 +1,29 @@
-import { Counter } from "./features/Counter/Counter";
-import { Todos } from "./features/Todos/Todos";
-import { Weather } from "./features/Weather/Weather";
+import { Route, Routes } from 'react-router';
+import { Counter } from './features/Counter/Counter';
+import { Todos } from './features/Todos/Todos';
+import { Weather } from './features/Weather/Weather';
+import { Nav } from './componets/Nav/Nav';
+
+import './App.css';
 
 export function App() {
   return (
-  <>
-    <Todos />
-    <Weather />
-    <Counter />
-    <Counter initialCount={3} diff={5} />
-  </>
+    <>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<h1>Homepage</h1>} />
+        <Route path="todos" element={<Todos />} />
+        <Route path="weather" element={<Weather />} />
+        <Route
+          path="counter"
+          element={
+            <>
+              <Counter />
+              <Counter initialCount={3} diff={5} />
+            </>
+          }
+        />
+      </Routes>
+    </>
   );
 }

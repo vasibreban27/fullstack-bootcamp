@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Buy Milk",
-      "completed": false,
+      "completed": true,
       "userId": 1
     },
     {
