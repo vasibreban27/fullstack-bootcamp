@@ -7,28 +7,10 @@
       "userId": 1
     },
     {
-      "id": 2,
-      "title": "Learn React",
-      "completed": true,
-      "userId": 1
-    },
-    {
       "title": "Learn Next",
       "completed": false,
       "userId": 1,
       "id": 3
-    },
-    {
-      "title": "Test",
-      "completed": true,
-      "userId": 1,
-      "id": 4
-    },
-    {
-      "title": "This works",
-      "completed": false,
-      "userId": 1,
-      "id": 6
     }
   ],
   "users": [
