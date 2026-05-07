@@ -2,9 +2,11 @@ import { Route, Routes } from 'react-router';
 import { Counter } from './features/Counter/Counter';
 import { Todos } from './features/Todos/Todos';
 import { Weather } from './features/Weather/Weather';
+import { Register } from './features/Auth/Register';
 import { Nav } from './componets/Nav/Nav';
 
 import './App.css';
+import './forms.css';
 
 export function App() {
   return (
@@ -13,6 +15,8 @@ export function App() {
       <Routes>
         <Route path="/" element={<h1>Homepage</h1>} />
         <Route path="todos" element={<Todos />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Register />} />
         <Route path="weather" element={<Weather />} />
         <Route
           path="counter"
