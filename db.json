@@ -20,6 +20,13 @@
       "firstName": "Paul",
       "lastName": "Negoescu",
       "id": 1
+    },
+    {
+      "email": "a@a.com",
+      "password": "$2a$10$G0XTLu31KfOe.cSc24H/ue//uTqLIM/IzISfDgP0Z1TTVr56IRwNO",
+      "firstName": "Paulica",
+      "lastName": "Paul",
+      "id": 2
     }
   ]
 }

@@ -7,25 +7,17 @@ import { useAuth } from './AuthContext';
 const validationSchema = z.object({
   email: z.email('Please tell us your email address.'),
   password: z.string().nonempty('Please pick a secure password.').min(6, 'Password should be at least 6 characters long.'),
-  retypePassword: z.string().nonempty('Please retype your password.').min(6, 'Password should be at least 6 characters long.'),
-  firstName: z.string().nonempty('Please tell us your first name.'),
-  lastName: z.string().nonempty('Please tell us your first name.'),
-}).refine((o) => o.password === o.retypePassword, {
-  error: 'Passwords did not match.',
-  path: ['retypePassword'],
 });
 
-export function Register() {
+export function Login() {
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
-    retypePassword: '',
-    firstName: '',
-    lastName: '',
   });
   const { errors, isValid } = useValidation(validationSchema);
 
   const { login } = useAuth()
+
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newValues = {...formValues, [e.target.name]: e.target.value};
@@ -42,11 +34,9 @@ export function Register() {
       return;
     }
 
-    const {retypePassword, ...forServer} = formValues;
-
-    const data = await fetch('/api/register', {
+    const data = await fetch('/api/login', {
       method: 'POST',
-      body: JSON.stringify(forServer),
+      body: JSON.stringify(formValues),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -63,7 +53,7 @@ export function Register() {
 
   return (
     <form className="brandForm" onSubmit={handleSubmit}>
-      <h1 className="spanFullGrid">Register</h1>
+      <h1 className="spanFullGrid">Login</h1>
 
       <label htmlFor="email">Email</label>
       <input
@@ -85,37 +75,7 @@ export function Register() {
       />
       {errors?.password && <p className="fieldError">{errors.password}</p>}
 
-      <label htmlFor="retypePassword">Retype Password</label>
-      <input
-        type="password"
-        name="retypePassword"
-        id="retypePassword"
-        value={formValues.retypePassword}
-        onChange={handleInputChange}
-      />
-      {errors?.retypePassword && <p className="fieldError">{errors.retypePassword}</p>}
-
-      <label htmlFor="firstName">First Name</label>
-      <input
-        type="text"
-        name="firstName"
-        id="firstName"
-        value={formValues.firstName}
-        onChange={handleInputChange}
-      />
-      {errors?.firstName && <p className="fieldError">{errors.firstName}</p>}
-
-      <label htmlFor="lastName">Last Name</label>
-      <input
-        type="text"
-        name="lastName"
-        id="lastName"
-        value={formValues.lastName}
-        onChange={handleInputChange}
-      />
-      {errors?.lastName && <p className="fieldError">{errors.lastName}</p>}
-
-      <button type="submit">Register</button>
+      <button type="submit">Login</button>
     </form>
   );
 }
