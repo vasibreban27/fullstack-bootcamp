@@ -2,20 +2,24 @@ import { Route, Routes } from 'react-router';
 import { Counter } from './features/Counter/Counter';
 import { Todos } from './features/Todos/Todos';
 import { Weather } from './features/Weather/Weather';
-import { Nav } from './componets/Nav/Nav';
 import { Register } from './features/Auth/Register';
+import { Nav } from './componets/Nav/Nav';
+import { BrandToastContainer } from './componets/BrandToastContainer/BrandToastContainer';
+
+
 import './App.css';
-import './forms.css'
+import './forms.css';
 
 export function App() {
   return (
     <>
+      <BrandToastContainer />
       <Nav />
       <Routes>
         <Route path="/" element={<h1>Homepage</h1>} />
         <Route path="todos" element={<Todos />} />
-        <Route path="register" element={<Register />}/>
-        <Route path="login" element={<Register />}/>
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Register />} />
         <Route path="weather" element={<Weather />} />
         <Route
           path="counter"

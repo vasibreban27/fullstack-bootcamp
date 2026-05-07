@@ -1,96 +1,118 @@
-import {useState} from "react";
+import { useState } from 'react';
 import * as z from 'zod/v4';
-//import {keyof} from "zod/v4";
+import { toast } from 'react-toastify';
+import { useValidation } from '../../utils/useValidation';
 
 const validationSchema = z.object({
-    email: z.email('Please tell us your email address'),
-    password:z.string().min(6,'Password must be at least 6 characters long'),
-    confirmPassword: z.string().min(6),
-    firstName: z.string().nonempty('Please tell us your first name'),
-    lastName: z.string().nonempty('Please tell us your last name'),
+  email: z.email('Please tell us your email address.'),
+  password: z.string().nonempty('Please pick a secure password.').min(6, 'Password should be at least 6 characters long.'),
+  retypePassword: z.string().nonempty('Please retype your password.').min(6, 'Password should be at least 6 characters long.'),
+  firstName: z.string().nonempty('Please tell us your first name.'),
+  lastName: z.string().nonempty('Please tell us your first name.'),
+}).refine((o) => o.password === o.retypePassword, {
+  error: 'Passwords did not match.',
+  path: ['retypePassword'],
 });
 
-
 export function Register() {
+  const [formValues, setFormValues] = useState({
+    email: '',
+    password: '',
+    retypePassword: '',
+    firstName: '',
+    lastName: '',
+  });
+  const { errors, isValid } = useValidation(validationSchema);
 
-    const [formValues,setFormValues] = useState({
-        email: '',
-        password: '',
-        confirmPassword: '',
-        firstName: '',
-        lastName: '',
-    })
 
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newValues = {...formValues, [e.target.name]: e.target.value};
+    setFormValues(newValues);    
+    if(errors) {
+      isValid(newValues);
+    }
+  }
 
-    function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-        const inputValue  = e.target.value;
-        const inputName = e.target.name;
-        setFormValues({...formValues, [inputName]:inputValue})
+  async function handleSubmit(e: React.SubmitEvent) {
+    e.preventDefault();
 
+    if(!isValid(formValues)) {    
+      return;
     }
 
-    async function handleSumbit(e: React.SubmitEvent) {
-        e.preventDefault();
+    const {retypePassword, ...forServer} = formValues;
 
-        const res = validationSchema.safeParse(formValues);
-        if(!res.success) {
-            const newErrors: Errors = {};
-            const flattenedErrors = z.flattenError(res.error);
-            for(const field in flattenedErrors.fieldErrors) {
-                const key = field as keyof Errors;
+    const data = await fetch('/api/register', {
+      method: 'POST',
+      body: JSON.stringify(forServer),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json());
 
-                const error = flattenedErrors.fieldErrors[field as keyof Errors];
-                if(error){
-                    newErrors[key] = error[0];
-                }
-
-            }
-            setErrors(newErrors);
-        }
-
-
-        const {confirmPassword, ...forServer} = formValues;
-
-         const data = await fetch('/api/register', {
-            method: 'POST',
-            body: JSON.stringify(forServer),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-         }).then(res => res.json());
-         console.log(data);
+    if(typeof data === 'string') {
+      toast.error(data);
     }
 
-    return (
-        <form className="brandForm" onSubmit={handleSumbit}>
-            <h1 className="spanFullGrid">Register</h1>
+    
+    console.log(data);
+  }
 
-            <label htmlFor="email">Email
-                <input type="email" name="email" id="email" value={formValues.email} onChange={handleInputChange}/>
-                    {errors.email && <p className="fieldError">{errors.email}</p>}
-            </label>
+  return (
+    <form className="brandForm" onSubmit={handleSubmit}>
+      <h1 className="spanFullGrid">Register</h1>
 
-            <label htmlFor="password">Password
-                <input type="password" name="password" id="password" value={formValues.password} onChange={handleInputChange}/>
-                {errors.password && <p className="fieldError">{errors.password}</p>}
-            </label>
+      <label htmlFor="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        value={formValues.email}
+        onChange={handleInputChange}
+      />
+      {errors?.email && <p className="fieldError">{errors.email}</p>}
 
-            <label htmlFor="confirmPassword">Confirm Password
-                <input type="password" name="confirmPassword" id="confirmPassword" value={formValues.confirmPassword} onChange={handleInputChange}/>
-                {errors.confirmPassword && <p className="fieldError">{errors.confirmPassword}</p>}
-            </label>
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        value={formValues.password}
+        onChange={handleInputChange}
+      />
+      {errors?.password && <p className="fieldError">{errors.password}</p>}
 
-            <label htmlFor="firstName">First Name
-                <input type="text" name="firstName" id="firstName" value={formValues.firstName} onChange={handleInputChange}/>
-                {errors.firstName && <p className="fieldError">{errors.firstName}</p>}
-            </label>
+      <label htmlFor="retypePassword">Retype Password</label>
+      <input
+        type="password"
+        name="retypePassword"
+        id="retypePassword"
+        value={formValues.retypePassword}
+        onChange={handleInputChange}
+      />
+      {errors?.retypePassword && <p className="fieldError">{errors.retypePassword}</p>}
 
-            <label htmlFor="lastName">Last Name
-                <input type="text" name="lastName" id="lastName" value={formValues.lastName} onChange={handleInputChange}/>
-                {errors.lastName && <p className="fieldError">{errors.lastName}</p>}
-            </label>
+      <label htmlFor="firstName">First Name</label>
+      <input
+        type="text"
+        name="firstName"
+        id="firstName"
+        value={formValues.firstName}
+        onChange={handleInputChange}
+      />
+      {errors?.firstName && <p className="fieldError">{errors.firstName}</p>}
 
-            <button type="submit">Register</button>
-        </form>
-    )
+      <label htmlFor="lastName">Last Name</label>
+      <input
+        type="text"
+        name="lastName"
+        id="lastName"
+        value={formValues.lastName}
+        onChange={handleInputChange}
+      />
+      {errors?.lastName && <p className="fieldError">{errors.lastName}</p>}
+
+      <button type="submit">Register</button>
+    </form>
+  );
 }

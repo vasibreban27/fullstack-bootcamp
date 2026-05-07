@@ -21,11 +21,11 @@
   ],
   "users": [
     {
-      "id": 1,
+      "email": "p@p.com",
+      "password": "$2a$10$aJjnlAN6LT0eNIqxlp1Mg.91PmLxjugWC7DvtobmKZ/rx5rAlsOpO",
       "firstName": "Paul",
       "lastName": "Negoescu",
-      "email": "paul.negoescu@digitalstack.ro",
-      "password": "hashed password"
+      "id": 1
     }
   ]
 }
