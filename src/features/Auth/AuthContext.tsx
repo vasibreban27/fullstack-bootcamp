@@ -1,40 +1,48 @@
-import {createContext, type ReactNode, useContext, useState} from 'react';
-import type {Auth} from './types';
+import { createContext, use, useState, type ReactNode } from "react";
+import type { Auth } from "./types";
+
 const AuthContext = createContext<Auth & {
-    login: (auth:Auth) => void;
-    logout: () => void;
-}|null>(null);
+  login: (auth: Auth) => void;  
+  logout: () => void;
+} | null>(null);
 
-const initialValue: Auth = {
-    accessToken: null,
-    user: null,
-}as const;
+const initialAuthValue: Auth = {
+  accessToken: null,
+  user: null,
+} as const;
 
+const storageKey = 'auth';
 
 export function AuthContextProvider({children}: {children: ReactNode}) {
-    const [auth, setAuth] = useState(initialValue);
-
-    function login(auth:Auth) {
-        setAuth(auth);
+  const [auth, setAuth] = useState(() => {
+    const fromStorage = localStorage.getItem(storageKey);
+    if(fromStorage) {
+      return JSON.parse(fromStorage);
     }
+    return initialAuthValue;
+  });
 
-    function logout() {
-        setAuth(initialValue);
-    }
+  function login(auth: Auth) {
+    setAuth(auth);
+    localStorage.setItem(storageKey, JSON.stringify(auth));
+  }
 
-    return (
-        <AuthContext value={{...auth, login, logout}}>{children}</AuthContext>
-    )
+  function logout() {
+    setAuth(initialAuthValue);
+    localStorage.removeItem(storageKey);
+  }
+
+  return (
+    <AuthContext value={{ ...auth, login, logout }}>{children}</AuthContext>
+  )
 }
 
 export function useAuth() {
-    const ctx = useContext(AuthContext);
+  const ctx = use(AuthContext);
 
-    if(!ctx) {
-        throw new Error('useAuth hook should be used in a child of AuthContextProvider');
-    }
+  if(!ctx) {
+    throw new Error('"useAuth" should only be used in a child of <AuthContextProvider>!');
+  }
 
-    return ctx;
+  return ctx;
 }
-
-

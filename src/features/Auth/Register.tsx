@@ -2,6 +2,7 @@ import { useState } from 'react';
 import * as z from 'zod/v4';
 import { toast } from 'react-toastify';
 import { useValidation } from '../../utils/useValidation';
+import { useAuth } from './AuthContext';
 
 const validationSchema = z.object({
   email: z.email('Please tell us your email address.'),
@@ -24,6 +25,7 @@ export function Register() {
   });
   const { errors, isValid } = useValidation(validationSchema);
 
+  const { login } = useAuth()
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newValues = {...formValues, [e.target.name]: e.target.value};
@@ -52,10 +54,11 @@ export function Register() {
 
     if(typeof data === 'string') {
       toast.error(data);
+      return;
     }
 
-    
-    console.log(data);
+    login(data);
+    toast.success('You have successfully logged in!');
   }
 
   return (
