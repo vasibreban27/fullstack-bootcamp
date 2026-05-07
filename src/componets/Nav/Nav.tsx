@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
 import { BrandNavLink } from "./BrandNavLink";
 
 import styles from './Nav.module.css';

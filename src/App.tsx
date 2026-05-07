@@ -5,21 +5,24 @@ import { Weather } from './features/Weather/Weather';
 import { Register } from './features/Auth/Register';
 import { Nav } from './componets/Nav/Nav';
 import { BrandToastContainer } from './componets/BrandToastContainer/BrandToastContainer';
-
+import {Login} from "./features/Auth/Login";
 
 import './App.css';
 import './forms.css';
+import {AuthContextProvider} from "./features/Auth/AuthContext.tsx";
 
 export function App() {
   return (
     <>
       <BrandToastContainer />
+        <AuthContextProvider>
       <Nav />
+
       <Routes>
         <Route path="/" element={<h1>Homepage</h1>} />
         <Route path="todos" element={<Todos />} />
         <Route path="register" element={<Register />} />
-        <Route path="login" element={<Register />} />
+        <Route path="login" element={<Login />} />
         <Route path="weather" element={<Weather />} />
         <Route
           path="counter"
@@ -31,6 +34,7 @@ export function App() {
           }
         />
       </Routes>
+        </AuthContextProvider>
     </>
-  );
+    );
 }
