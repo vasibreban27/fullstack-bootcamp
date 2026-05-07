@@ -1,4 +1,18 @@
 import { useState } from 'react';
+import * as z from 'zod/v4';
+import { toast } from 'react-toastify';
+import { useValidation } from '../../utils/useValidation';
+
+const validationSchema = z.object({
+  email: z.email('Please tell us your email address.'),
+  password: z.string().nonempty('Please pick a secure password.').min(6, 'Password should be at least 6 characters long.'),
+  retypePassword: z.string().nonempty('Please retype your password.').min(6, 'Password should be at least 6 characters long.'),
+  firstName: z.string().nonempty('Please tell us your first name.'),
+  lastName: z.string().nonempty('Please tell us your first name.'),
+}).refine((o) => o.password === o.retypePassword, {
+  error: 'Passwords did not match.',
+  path: ['retypePassword'],
+});
 
 export function Register() {
   const [formValues, setFormValues] = useState({
@@ -8,13 +22,23 @@ export function Register() {
     firstName: '',
     lastName: '',
   });
+  const { errors, isValid } = useValidation(validationSchema);
+
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setFormValues({...formValues, [e.target.name]: e.target.value})    
+    const newValues = {...formValues, [e.target.name]: e.target.value};
+    setFormValues(newValues);    
+    if(errors) {
+      isValid(newValues);
+    }
   }
 
   async function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault();
+
+    if(!isValid(formValues)) {    
+      return;
+    }
 
     const {retypePassword, ...forServer} = formValues;
 
@@ -27,8 +51,10 @@ export function Register() {
     }).then(res => res.json());
 
     if(typeof data === 'string') {
-      console.warn(data);
+      toast.error(data);
     }
+
+    
     console.log(data);
   }
 
@@ -44,6 +70,8 @@ export function Register() {
         value={formValues.email}
         onChange={handleInputChange}
       />
+      {errors?.email && <p className="fieldError">{errors.email}</p>}
+
       <label htmlFor="password">Password</label>
       <input
         type="password"
@@ -52,6 +80,8 @@ export function Register() {
         value={formValues.password}
         onChange={handleInputChange}
       />
+      {errors?.password && <p className="fieldError">{errors.password}</p>}
+
       <label htmlFor="retypePassword">Retype Password</label>
       <input
         type="password"
@@ -60,6 +90,8 @@ export function Register() {
         value={formValues.retypePassword}
         onChange={handleInputChange}
       />
+      {errors?.retypePassword && <p className="fieldError">{errors.retypePassword}</p>}
+
       <label htmlFor="firstName">First Name</label>
       <input
         type="text"
@@ -68,6 +100,8 @@ export function Register() {
         value={formValues.firstName}
         onChange={handleInputChange}
       />
+      {errors?.firstName && <p className="fieldError">{errors.firstName}</p>}
+
       <label htmlFor="lastName">Last Name</label>
       <input
         type="text"
@@ -76,6 +110,7 @@ export function Register() {
         value={formValues.lastName}
         onChange={handleInputChange}
       />
+      {errors?.lastName && <p className="fieldError">{errors.lastName}</p>}
 
       <button type="submit">Register</button>
     </form>

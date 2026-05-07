@@ -4,6 +4,8 @@ import { Todos } from './features/Todos/Todos';
 import { Weather } from './features/Weather/Weather';
 import { Register } from './features/Auth/Register';
 import { Nav } from './componets/Nav/Nav';
+import { BrandToastContainer } from './componets/BrandToastContainer/BrandToastContainer';
+
 
 import './App.css';
 import './forms.css';
@@ -11,6 +13,7 @@ import './forms.css';
 export function App() {
   return (
     <>
+      <BrandToastContainer />
       <Nav />
       <Routes>
         <Route path="/" element={<h1>Homepage</h1>} />
