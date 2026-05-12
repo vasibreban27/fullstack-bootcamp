@@ -25,6 +25,9 @@ export function Nav() {
         <li>
           <BrandNavLink to="weather">Weather</BrandNavLink>
         </li>
+          <li>
+              <BrandNavLink to="boardgames">Boardgames</BrandNavLink>
+          </li>
         {user && (
           <li className={styles.pushRight}>
             Welcome, {user.firstName}!{' '}

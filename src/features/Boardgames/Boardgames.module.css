@@ -1,0 +1,12 @@
+.list{
+
+}
+
+.card{
+
+}
+
+@media screen and(prefers-color-scheme: dark){
+    --shadow-color:#fff8;
+    --bg-color:#555;
+}

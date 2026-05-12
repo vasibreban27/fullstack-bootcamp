@@ -9,6 +9,7 @@ import { BrandToastContainer } from './componets/BrandToastContainer/BrandToastC
 
 import './App.css';
 import './forms.css';
+import {BoardgamesLayout} from "./features/Boardgames";
 
 export function App() {
   return (
@@ -21,6 +22,7 @@ export function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="weather" element={<Weather />} />
+            <Route path="boardgames/*" element={<BoardgamesLayout />} />
           <Route
             path="counter"
             element={
