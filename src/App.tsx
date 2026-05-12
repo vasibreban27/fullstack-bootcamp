@@ -6,6 +6,7 @@ import { Register } from './features/Auth/Register';
 import { Login } from './features/Auth/Login';
 import { Nav } from './componets/Nav/Nav';
 import { BrandToastContainer } from './componets/BrandToastContainer/BrandToastContainer';
+import { BoardgamesLayout } from './features/Boardgames';
 
 import './App.css';
 import './forms.css';
@@ -21,6 +22,7 @@ export function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="weather" element={<Weather />} />
+          <Route path="boardgames/*" element={<BoardgamesLayout />} />
           <Route
             path="counter"
             element={

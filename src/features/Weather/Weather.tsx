@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { WeatherData } from './types';
 
-const apiKey = import.meta.env.VITE_API_URL;
+const apiKey = import.meta.env.VITE_API_URL as string;
 const baseUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=metric`;
 
 export function Weather() {
@@ -11,7 +11,7 @@ export function Weather() {
     navigator.geolocation.getCurrentPosition(fetchData, console.warn);
 
     function fetchData(data: GeolocationPosition) {
-      fetch(
+      void fetch(
         `${baseUrl}&lat=${data.coords.latitude}&lon=${data.coords.longitude}`,
       )
         .then((res) => res.json())
@@ -24,9 +24,15 @@ export function Weather() {
     const form = e.target;
 
     const formData = new FormData(form);
+    const city = formData.get('city');
+    const country = formData.get('country');
 
-    const data = await fetch(`${baseUrl}&q=${formData.get('city')},${formData.get('country')}`)
-      .then((res) => res.json())
+    if(typeof city !== 'string' || typeof country !== 'string') {
+      return;
+    }
+
+    const data = await fetch(`${baseUrl}&q=${city},${country}`)
+      .then((res) => res.json()) as WeatherData;
     setWeatherData(data);
   }
 

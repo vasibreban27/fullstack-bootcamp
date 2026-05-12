@@ -8,7 +8,7 @@ type Props = {
 
 export function TodoItem({ todo, onDeleteTodo }: Props) {
   function handleCompleteTodo(todo: Todo) {
-    fetch(`/api/todos/${todo.id}`, {
+    void fetch(`/api/todos/${todo.id}`, {
       method: 'PATCH',
       body: JSON.stringify({ completed: !todo.completed }),
       headers: {

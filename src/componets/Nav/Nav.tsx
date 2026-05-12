@@ -25,13 +25,16 @@ export function Nav() {
         <li>
           <BrandNavLink to="weather">Weather</BrandNavLink>
         </li>
+        <li>
+          <BrandNavLink to="boardgames">Boardgames</BrandNavLink>
+        </li>
         {user && (
           <li className={styles.pushRight}>
             Welcome, {user.firstName}!{' '}
             <a href="/" onClick={(e) => {
               e.preventDefault();
               logout();
-              navigate('/');
+              void navigate('/');
             }}>Logout</a>
           </li>
         )}
