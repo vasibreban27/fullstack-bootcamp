@@ -6,7 +6,7 @@ export function Todos() {
   const [todos, setTodos] = useState<Todo[] | null>(null);
 
   useEffect(() => {
-    fetch(`/api/todos`).then((res) => res.json()).then(setTodos);
+    void fetch(`/api/todos`).then((res) => res.json()).then(setTodos);
   }, []);
 
   async function handleAddTodo(formData: FormData) { 
@@ -24,7 +24,7 @@ export function Todos() {
       headers: {
         'Content-Type': 'application/json',
       }
-    }).then(res=> res.json());
+    }).then(res=> res.json()) as Todo;
 
     const newTodos = todos ? [...todos, newTodo] : [newTodo];
 

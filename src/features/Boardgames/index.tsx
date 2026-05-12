@@ -1,11 +1,15 @@
-import {Route, Routes} from "react-router";
+import { Routes, Route } from "react-router";
 import { List } from "./List";
+import { Details } from "./Details";
+import { Add } from "./Add";
 
-export function BoardgamesLayout(){
+export function BoardgamesLayout() {
+  return (
+    <Routes> 
+      <Route index element={<List />} />
+      <Route path=":id" element={<Details />} />
+      <Route path="add" element={<Add />} />
 
-    return(
-        <Routes>
-            <Route index element={<List />} path="/" />
-        </Routes>
-    )
+    </Routes>
+  )
 }

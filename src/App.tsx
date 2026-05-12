@@ -6,10 +6,10 @@ import { Register } from './features/Auth/Register';
 import { Login } from './features/Auth/Login';
 import { Nav } from './componets/Nav/Nav';
 import { BrandToastContainer } from './componets/BrandToastContainer/BrandToastContainer';
+import { BoardgamesLayout } from './features/Boardgames';
 
 import './App.css';
 import './forms.css';
-import {BoardgamesLayout} from "./features/Boardgames";
 
 export function App() {
   return (
@@ -22,7 +22,7 @@ export function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="weather" element={<Weather />} />
-            <Route path="boardgames/*" element={<BoardgamesLayout />} />
+          <Route path="boardgames/*" element={<BoardgamesLayout />} />
           <Route
             path="counter"
             element={
@@ -32,6 +32,7 @@ export function App() {
               </>
             }
           />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
     </>
   );

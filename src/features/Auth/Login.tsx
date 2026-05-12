@@ -3,6 +3,7 @@ import * as z from 'zod/v4';
 import { toast } from 'react-toastify';
 import { useValidation } from '../../utils/useValidation';
 import { useAuth } from './Auth';
+import type { Auth } from './types';
 
 const validationSchema = z.object({
   email: z.email('Please tell us your email address.'),
@@ -40,7 +41,7 @@ export function Login() {
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(res => res.json());
+    }).then(res => res.json()) as Auth | string;
 
     if(typeof data === 'string') {
       toast.error(data);
