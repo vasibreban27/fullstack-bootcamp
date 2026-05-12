@@ -33,6 +33,13 @@
       "firstName": "Paulica",
       "lastName": "Paul",
       "id": 2
+    },
+    {
+      "email": "vbreban27@gmail.com",
+      "password": "$2a$10$PJ2MGhCNMv.z8TFzZE3mTOQfuUUjJCND8B8/QF95odrW2yVF9JKHe",
+      "firstName": "Vasile",
+      "lastName": "Breban",
+      "id": 3
     }
   ]
 }
