@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as z from 'zod/v4';
 import { toast } from 'react-toastify';
 import { useValidation } from '../../utils/useValidation';
-import { useAuth } from './AuthContext';
+import { useAuth } from './Auth';
 
 const validationSchema = z.object({
   email: z.email('Please tell us your email address.'),

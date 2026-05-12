@@ -9,13 +9,11 @@ import { BrandToastContainer } from './componets/BrandToastContainer/BrandToastC
 
 import './App.css';
 import './forms.css';
-import { AuthContextProvider } from './features/Auth/AuthContext';
 
 export function App() {
   return (
     <>
       <BrandToastContainer />
-      <AuthContextProvider>
         <Nav />
         <Routes>
           <Route path="/" element={<h1>Homepage</h1>} />
@@ -33,7 +31,6 @@ export function App() {
             }
           />
         </Routes>
-      </AuthContextProvider>
     </>
   );
 }
