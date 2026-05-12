@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router';
-import { useAuth } from '../../features/Auth/AuthContext';
+import { useAuth } from '../../features/Auth/Auth';
 import { BrandNavLink } from './BrandNavLink';
 
 import styles from './Nav.module.css';

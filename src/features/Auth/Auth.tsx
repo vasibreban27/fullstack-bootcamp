@@ -1,7 +1,6 @@
-//import { createContext, use, useState, type ReactNode } from "react";
 import type { Auth } from "./types";
-import {atomWithStorage, RESET} from "jotai/utils";
-import {useAtom} from "jotai";
+import { atomWithStorage, RESET } from "jotai/utils";
+import { useAtom } from "jotai";
 
 const storageKey = 'auth';
 
@@ -10,7 +9,7 @@ const initialAuthValue: Auth = {
   user: null,
 } as const;
 
-const authAtom = atomWithStorage(storageKey, initialAuthValue,undefined, {getOnInit: true});
+const authAtom = atomWithStorage(storageKey, initialAuthValue, undefined, {getOnInit: true});
 
 export function useAuth() {
   const [auth, setAuth] = useAtom(authAtom);
