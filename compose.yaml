@@ -1,0 +1,17 @@
+services:
+  api:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+       PORT: 3000
+       NODE_ENV: development
+    command: pnpm run dev
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+        - action: rebuild
+          path: ./package.json
