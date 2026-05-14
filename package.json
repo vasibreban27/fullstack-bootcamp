@@ -2,19 +2,16 @@
   "name": "fullstack-bootcamp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
-  "scripts": {
-    "dev": "nodemon --exec tsx src/server.ts",
-    "start": "node src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "index.js",
+  "scripts":  {
+    "dev": "nodemon --exec node src/server.ts",
+    "start": "node src/server.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "packageManager": "pnpm@11.0.8",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "^11.0.8",
+      "version": "11.0.8",
       "onFail": "download"
     }
   },
@@ -24,7 +21,6 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "nodemon": "^3.1.14",
-    "tsx": "^4.21.0"
+    "nodemon": "^3.1.14"
   }
 }
